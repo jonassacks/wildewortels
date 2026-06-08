@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilde Wortels — Film</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23CC2E1A'/><text x='16' y='23' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='15' fill='white'>WW</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:   #CC2E1A;
+      --green: #2D5233;
+      --cream: #E8E3DE;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* ── Video ─────────────────────────────────────────── */
+    #player {
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    /* ── Start overlay ─────────────────────────────────── */
+    #start-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+
+    #start-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .start-logo {
+      width: clamp(240px, 40vw, 400px);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .start-hint {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      opacity: 0.65;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    /* ── Back link ─────────────────────────────────────── */
+    .back-link {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.75rem;
+      z-index: 10;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: rgba(255,255,255,0.9); }
+
+    /* ── Clip name ─────────────────────────────────────── */
+    #clip-name {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 10;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+      max-width: calc(100vw - 120px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #clip-name.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Audio toggle ──────────────────────────────────── */
+    #audio-toggle {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: rgba(255,255,255,0.55);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    #audio-toggle:hover {
+      border-color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.9);
+    }
+
+    #audio-toggle svg { width: 17px; height: 17px; }
+
+    /* ── Empty state ───────────────────────────────────── */
+    #empty-state {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    #empty-state.visible { display: flex; }
+
+    #empty-state p {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+
+    #empty-state code {
+      font-family: monospace;
+      background: rgba(255,255,255,0.07);
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <video id="player" playsinline preload="auto"></video>
+  <audio id="audio" loop preload="auto"></audio>
+
+  <div id="start-overlay">
+    <img src="assets/logo.png" alt="Wilde Wortels" class="start-logo">
+    <p class="start-hint">Klik om te beginnen</p>
+  </div>
+
+  <div id="empty-state">
+    <p>
+      Geen clips gevonden.<br>
+      Voeg <code>.mp4</code> bestanden toe aan <code>clips/</code><br>
+      en draai <code>node generate-manifest.js</code>
+    </p>
+  </div>
+
+  <a href="index.html" class="back-link">← Wilde Wortels</a>
+  <div id="clip-name"></div>
+
+  <button id="audio-toggle" aria-label="Geluid aan/uit">
+    <svg id="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+    <svg id="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+
+  <script>
+    const video       = document.getElementById('player');
+    const audio       = document.getElementById('audio');
+    const overlay     = document.getElementById('start-overlay');
+    const emptyState  = document.getElementById('empty-state');
+    const clipNameEl  = document.getElementById('clip-name');
+    const audioToggle = document.getElementById('audio-toggle');
+    const iconOn      = document.getElementById('icon-on');
+    const iconOff     = document.getElementById('icon-off');
+
+    let clips = [];
+    let index = 0;
+    let nameTimer = null;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function cleanName(filename) {
+      return filename
+        .replace(/\.[^.]+$/, '')         // strip extension
+        .replace(/^\d+\s*[._\-]?\s*/, '') // strip leading number prefix
+        .replace(/[-_]/g, ' ')            // separators → spaces
+        .trim();
+    }
+
+    function showName(name) {
+      clearTimeout(nameTimer);
+      clipNameEl.textContent = name;
+      clipNameEl.classList.add('visible');
+      nameTimer = setTimeout(() => clipNameEl.classList.remove('visible'), 3500);
+    }
+
+    function playAt(i) {
+      index = ((i % clips.length) + clips.length) % clips.length;
+      video.src = 'clips/' + clips[index];
+      video.load();
+      video.play().catch(() => {});
+      showName(cleanName(clips[index]));
+    }
+
+    video.addEventListener('ended', () => {
+      const next = index + 1;
+      if (next >= clips.length) clips = shuffle(clips); // re-shuffle on loop
+      playAt(next);
+    });
+
+    function start() {
+      overlay.classList.add('hidden');
+      if (clips.length === 0) {
+        emptyState.classList.add('visible');
+        return;
+      }
+      playAt(0);
+      // Set audio src only if audio/ folder has a file (graceful fallback)
+      if (!audio.src || audio.src === window.location.href) {
+        audio.src = 'audio/soundtrack.mp3';
+      }
+      audio.play().catch(() => {});
+    }
+
+    overlay.addEventListener('click', start);
+
+    audioToggle.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      iconOn.style.display  = audio.muted ? 'none' : '';
+      iconOff.style.display = audio.muted ? '' : 'none';
+    });
+
+    // Load manifest
+    fetch('clips.json')
+      .then(r => r.json())
+      .then(data => {
+        clips = shuffle(data.filter(f => typeof f === 'string' && f.length > 0));
+        if (clips.length === 0) {
+          overlay.querySelector('.start-hint').textContent = 'Geen clips gevonden';
+        }
+      })
+      .catch(() => {
+        overlay.querySelector('.start-hint').textContent = 'Fout bij laden clips';
+      });
+  </script>
+
+</body>
+</html>

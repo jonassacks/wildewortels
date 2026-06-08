@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilde Wortels — Collectief voor leven met de natuur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23CC2E1A'/><text x='16' y='23' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='15' fill='white'>WW</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOCKSCREEN -->
+  <div id="lockscreen" class="lockscreen">
+    <div class="lockscreen__box">
+      <img src="assets/logo.png" alt="Wilde Wortels" class="lockscreen__logo">
+      <form id="lock-form" class="lockscreen__form">
+        <input type="password" id="lock-input" placeholder="Toegangscode" autocomplete="off" autofocus>
+        <button type="submit">Ga verder &rarr;</button>
+        <p id="lock-error" class="lockscreen__error">Onjuiste code. Probeer opnieuw.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-brand">Wilde Wortels</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#visie">Visie</a></li>
+      <li><a href="#wie">Wie zijn wij</a></li>
+      <li><a href="#land">Land gezocht</a></li>
+<li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img src="assets/logo.png" alt="Wilde Wortels" class="hero-logo">
+      <p class="hero-tagline">Collectief voor leven met de natuur</p>
+      <a href="#intro" class="hero-scroll" aria-label="Scroll naar beneden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <section id="intro" class="intro-strip">
+    <div class="container">
+      <p class="intro-greeting">Aangenaam,</p>
+      <h2 class="intro-heading">Wij zijn de Wilde Wortels</h2>
+      <p class="lead">Wij zijn een groep enthousiaste stedelingen graag op een duurzame manier met elkaar en de natuur willen leven. We hebben ons verenigd in een CPO vereniging en zijn op zoek naar land om te wortelen.</p>
+    </div>
+  </section>
+
+  <!-- PHOTO FULL WIDTH -->
+  <div class="photo-full">
+    <img src="assets/photo-kleverbergh.jpg" alt="Wilde Wortels op bezoek bij Kleverbergh">
+  </div>
+
+  <!-- ONZE DROOM -->
+  <section id="visie" class="section section--cream">
+    <div class="container">
+      <div class="two-col">
+        <div class="two-col__text">
+          <span class="label">Onze droom</span>
+          <h2>Wij zijn een gemeenschap</h2>
+          <p>Wij zijn gemeenschap die collectief verantwoordelijkheid wil dragen voor onze leefomgeving. We willen meer mét en van het land leven en een inspirerende omgeving bouwen om te leren, creëren en waar ambacht ruimte krijgt. Een plek waar we zoveel mogelijk van eigen grond leven, en tegelijkertijd teruggeven door diezelfde grond te regenereren. Een nieuwe bestemming waar iedereen een eigen thuis heeft en waar we samen leven, delen en vieren.</p>
+        </div>
+        <div class="two-col__image">
+          <img src="assets/photo-path.jpg" alt="Pad tussen de eco-woningen">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOE ZIEN WE DIT VOOR ONS -->
+  <section class="section section--green">
+    <div class="container">
+      <div class="two-col two-col--reverse">
+        <div class="two-col__image">
+          <img src="assets/photo-village.jpg" alt="Overzicht van de toekomstige gemeenschap">
+        </div>
+        <div class="two-col__text two-col__text--light">
+          <span class="label label--light">Hoe zien we dit voor ons</span>
+          <h2>Regeneratief leven</h2>
+          <p>We zijn een groep natuurliefhebbers en willen een positieve bijdrage leveren aan onze toekomstige leefomgeving. We willen met een kleine ecologische impact leven en bijna al het land dat we niet gebruiken voor woningen, moestuin of voedselbos, willen we rewilden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT ZOEKEN WE -->
+  <section id="land" class="section section--white">
+    <div class="container">
+      <div class="land-statement">
+        <span class="label">Land gezocht</span>
+        <h2>Wat zoeken we?</h2>
+        <p>We zijn op zoek naar 3–8 hectaren grond met ruimte voor 4–6 woningen, het liefst op fietsafstand van een intercitystation en max. 1–1,5 uur van de Randstad.</p>
+        <p>Daarvoor zoeken we een enthousiaste gemeente die open staat voor dit soort nieuwe woonvormen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DE MENSEN -->
+  <section id="wie" class="section section--cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">De mensen</span>
+        <h2>Wij zijn de Wilde Wortels</h2>
+        <p class="section-intro">Negen mensen, verspreid over Amsterdam, Brussel, en Gouda, die samen dromen van een andere manier van leven.</p>
+      </div>
+      <ul class="names-list">
+        <li>Willem Pino</li>
+        <li>Julia Rijssenbeek</li>
+        <li>Marije Ozinga</li>
+        <li>Laura ter Steeg</li>
+        <li>Jonas Sacks</li>
+        <li>Pieter ter Steeg</li>
+        <li>Bas van der Reep</li>
+        <li>Marie-Christine Franken</li>
+        <li>Emily ter Steeg</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section--red">
+    <div class="container contact-inner">
+      <img src="assets/logo.png" alt="Wilde Wortels" class="contact-logo">
+      <h2>Ken je een plek, een gemeente, of iemand die met ons mee wil denken?</h2>
+      <p>Of wil je meer weten over onze plannen? We horen heel graag van je.</p>
+      <a href="mailto:hello@wildewortels.com" class="btn btn--white">hello@wildewortels.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2025 Wilde Wortels</span>
+      <span>wildewortels.com</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
