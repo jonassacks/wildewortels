@@ -48,7 +48,10 @@
 
   <!-- PHOTO FULL WIDTH -->
   <div class="photo-full">
-    <img src="assets/photo-kleverbergh.jpg" alt="Wilde Wortels op bezoek bij Kleverbergh">
+    <picture>
+      <source media="(min-width: 900px)" srcset="assets/photo-hero-desktop.jpg">
+      <img src="assets/photo-hero-mobile.jpg" alt="Wilde Wortels in het veld">
+    </picture>
   </div>
 
   <!-- ONZE DROOM -->
@@ -61,7 +64,7 @@
           <p>Wij zijn gemeenschap die collectief verantwoordelijkheid wil dragen voor onze leefomgeving. We willen meer mét en van het land leven en een inspirerende omgeving bouwen om te leren, creëren en waar ambacht ruimte krijgt. Een plek waar we zoveel mogelijk van eigen grond leven, en tegelijkertijd teruggeven door diezelfde grond te regenereren. Een nieuwe bestemming waar iedereen een eigen thuis heeft en waar we samen leven, delen en vieren.</p>
         </div>
         <div class="two-col__image">
-          <img src="assets/photo-path.jpg" alt="Pad tussen de eco-woningen">
+          <img src="assets/photo-pointer.jpg" alt="Pad in de gemeenschap">
         </div>
       </div>
     </div>
@@ -72,7 +75,7 @@
     <div class="container">
       <div class="two-col two-col--reverse">
         <div class="two-col__image">
-          <img src="assets/photo-village.jpg" alt="Overzicht van de toekomstige gemeenschap">
+          <img src="assets/photo-boots.jpg" alt="Laarzen in de natuur">
         </div>
         <div class="two-col__text two-col__text--light">
           <span class="label label--light">Hoe zien we dit voor ons</span>
@@ -118,12 +121,19 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section section--red">
-    <div class="container contact-inner">
-      <img src="assets/logo.png" alt="Wilde Wortels" class="contact-logo">
-      <h2>Ken je een plek, een gemeente, of iemand die met ons mee wil denken?</h2>
-      <p>Of wil je meer weten over onze plannen? We horen heel graag van je.</p>
-      <a href="mailto:hello@wildewortels.com" class="btn btn--white">hello@wildewortels.com</a>
+  <section id="contact" class="section--red">
+    <div class="contact-split">
+      <div class="contact-content">
+        <div class="contact-inner">
+          <img src="assets/logo.png" alt="Wilde Wortels" class="contact-logo">
+          <h2>Ken je een plek, een gemeente, of iemand die met ons mee wil denken?</h2>
+          <p>Of wil je meer weten over onze plannen? We horen heel graag van je.</p>
+          <a href="mailto:hello@wildewortels.com" class="btn btn--white">hello@wildewortels.com</a>
+        </div>
+      </div>
+      <div class="contact-photo">
+        <img src="assets/photo-houses-path.jpg" alt="Pad langs de woningen">
+      </div>
     </div>
   </section>
 
