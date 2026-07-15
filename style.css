@@ -279,7 +279,7 @@ strong { font-weight: 600; }
 .photo-full {
   width: 100%;
   max-width: var(--max-w);
-  margin: clamp(2rem, 5vw, 3.5rem) auto;
+  margin: 0 auto;
   padding: 0 clamp(1.25rem, 5vw, 3rem);
 }
 
