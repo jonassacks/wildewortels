@@ -549,6 +549,27 @@ strong { font-weight: 600; }
   transform: translateY(-1px);
 }
 
+/* ─── Contact phone (number as image, not scrapable text) ────────── */
+.contact-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.contact-phone__icon {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  flex: none;
+}
+
+.contact-phone__number {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
 /* ─── Footer ─────────────────────────────────────────────────────── */
 .footer {
   background: var(--dark);
